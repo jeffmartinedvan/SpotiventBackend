@@ -1,8 +1,7 @@
-package com.Spotivent.SpotiventBackend.users.DTO;
+package com.Spotivent.SpotiventBackend.users.dto;
 
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
-import java.time.Instant;
 
 @Data
 public class RegisterRequestDTO {
@@ -10,7 +9,7 @@ public class RegisterRequestDTO {
     private String role;
 
     @NotNull
-    private String name;
+    private String username;
 
     @NotNull
     private String email;

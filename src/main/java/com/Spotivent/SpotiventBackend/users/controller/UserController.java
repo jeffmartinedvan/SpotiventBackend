@@ -1,7 +1,7 @@
-package com.Spotivent.SpotiventBackend.users.UserController;
+package com.Spotivent.SpotiventBackend.users.controller;
 
-import com.Spotivent.SpotiventBackend.users.DTO.RegisterRequestDTO;
-import com.Spotivent.SpotiventBackend.users.UserService.UserService;
+import com.Spotivent.SpotiventBackend.users.dto.RegisterRequestDTO;
+import com.Spotivent.SpotiventBackend.users.service.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

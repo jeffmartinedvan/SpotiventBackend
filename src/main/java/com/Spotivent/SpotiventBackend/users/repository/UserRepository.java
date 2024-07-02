@@ -1,6 +1,6 @@
-package com.Spotivent.SpotiventBackend.users.UserRepository;
+package com.Spotivent.SpotiventBackend.users.repository;
 
-import com.Spotivent.SpotiventBackend.users.UserEntity.Users;
+import com.Spotivent.SpotiventBackend.users.entity.Users;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

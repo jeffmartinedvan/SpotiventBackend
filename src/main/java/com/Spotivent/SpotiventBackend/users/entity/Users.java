@@ -1,9 +1,10 @@
-package com.Spotivent.SpotiventBackend.users.UserEntity;
+package com.Spotivent.SpotiventBackend.users.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
+
 import java.time.Instant;
 
 @Entity
@@ -23,12 +24,11 @@ public class Users {
     private String password;
 
     @NotNull(message = "Role must not be null")
+    @Column(name = "role_id")
     private String role;
 
-    @NotNull(message = "Name must not be null")
-    private String name;
-
-    private Integer point;
+    @NotNull(message = "Username must not be null")
+    private String username;
 
     @Column(name = "referral_code")
     private String referralCode;
