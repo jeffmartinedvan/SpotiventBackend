@@ -24,8 +24,8 @@ public class Users {
     private String password;
 
     @NotNull(message = "Role must not be null")
-    @Column(name = "role_id")
-    private String role;
+    @Enumerated(EnumType.STRING)
+    private Roles role;
 
     @NotNull(message = "Username must not be null")
     private String username;
