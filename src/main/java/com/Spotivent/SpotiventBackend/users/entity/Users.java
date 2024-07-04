@@ -13,25 +13,32 @@ import java.time.Instant;
 public class Users {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
     private long id;
 
+    @Column(name = "avatar")
     private String avatar;
 
     @NotNull(message = "Email must not be null")
+    @Column(name = "email", nullable = false)
     private String email;
 
     @NotNull(message = "Password must not be null")
+    @Column(name = "password", nullable = false)
     private String password;
 
     @NotNull(message = "Role must not be null")
+    @Column(name = "role", nullable = false)
     @Enumerated(EnumType.STRING)
     private Roles role;
 
     @NotNull(message = "Username must not be null")
+    @Column(name = "username", nullable = false)
     private String username;
 
-    @Column(name = "referral_code")
-    private String referralCode;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "referral_id", nullable = false)
+    private String referral_id;
 
     @NotNull
     @ColumnDefault("CURRENT_TIMESTAMP")
