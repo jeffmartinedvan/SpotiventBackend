@@ -3,10 +3,7 @@ package com.Spotivent.SpotiventBackend.users.controller;
 import com.Spotivent.SpotiventBackend.users.dto.RegisterRequestDTO;
 import com.Spotivent.SpotiventBackend.users.service.UserService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1/users")
@@ -15,6 +12,12 @@ public class UserController {
 
     public UserController(UserService userService) {
         this.userService = userService;
+    }
+
+
+    @GetMapping("/profile/{id}")
+    public ResponseEntity<?> profile(@PathVariable Long id) {
+        return ResponseEntity.ok(userService.getUserById(id));
     }
 
     @PostMapping("/register")
