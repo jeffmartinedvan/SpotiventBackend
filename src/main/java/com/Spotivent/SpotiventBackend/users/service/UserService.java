@@ -8,4 +8,5 @@ public interface UserService {
     RegisterResponseDTO register(RegisterRequestDTO registerRequestDTO);
     RegisterResponseDTO getUserById(Long id);
     Users getDetailUser(Long id);
+
 }
