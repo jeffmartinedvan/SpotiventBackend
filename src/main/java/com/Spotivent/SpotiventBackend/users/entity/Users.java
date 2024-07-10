@@ -1,11 +1,14 @@
 package com.Spotivent.SpotiventBackend.users.entity;
 
+import com.Spotivent.SpotiventBackend.referrals.entity.Referrals;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 
 import java.time.Instant;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 @Entity
 @Data
@@ -36,18 +39,17 @@ public class Users {
     @Column(name = "username", nullable = false)
     private String username;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "referral_id", nullable = false)
-    private String referral_id;
+    @OneToMany(mappedBy = "user")
+    private Set<Referrals> referrals = new LinkedHashSet<>();
 
     @NotNull
     @ColumnDefault("CURRENT_TIMESTAMP")
-    @Column(name = "created_at")
+    @Column(name = "created_at", nullable = false)
     private Instant createdAt;
 
     @NotNull
     @ColumnDefault("CURRENT_TIMESTAMP")
-    @Column(name = "updated_at")
+    @Column(name = "updated_at", nullable = false)
     private Instant updatedAt;
 
     @Column(name = "deleted_at")
