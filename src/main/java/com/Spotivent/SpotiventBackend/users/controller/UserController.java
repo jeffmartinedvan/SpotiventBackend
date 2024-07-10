@@ -14,7 +14,6 @@ public class UserController {
         this.userService = userService;
     }
 
-
     @GetMapping("/profile/{id}")
     public ResponseEntity<?> profile(@PathVariable Long id) {
         return ResponseEntity.ok(userService.getUserById(id));
