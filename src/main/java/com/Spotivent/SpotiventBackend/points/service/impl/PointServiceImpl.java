@@ -21,7 +21,6 @@ public class PointServiceImpl implements PointService {
     @Override
     public Points createPoints(CreatePointRequestDTO createPointRequestDTO) {
         Points points = new Points();
-        points.setUser(userService.getDetailUser(createPointRequestDTO.getUserId()));
         return null;
     }
 }

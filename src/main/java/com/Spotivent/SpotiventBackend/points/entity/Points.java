@@ -24,7 +24,7 @@ public class Points {
 //    @ManyToOne(fetch = FetchType.LAZY, optional = false)
 //    @JoinColumn(name = "user_id", nullable = false)
 //    @JsonIgnore
-    private Users user;
+//    private Users user;
 
     @NotNull
     @ColumnDefault("CURRENT_TIMESTAMP")
