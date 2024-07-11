@@ -1,5 +1,7 @@
 package com.Spotivent.SpotiventBackend.points.entity;
 
+import com.Spotivent.SpotiventBackend.users.entity.Users;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
@@ -17,7 +19,12 @@ public class Points {
 
     @NotNull
     @Column(name = "point", nullable = false)
-    private Integer point;
+    private Long point;
+
+//    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+//    @JoinColumn(name = "user_id", nullable = false)
+//    @JsonIgnore
+    private Users user;
 
     @NotNull
     @ColumnDefault("CURRENT_TIMESTAMP")

@@ -1,5 +1,6 @@
 package com.Spotivent.SpotiventBackend.users.entity;
 
+import com.Spotivent.SpotiventBackend.points.entity.Points;
 import com.Spotivent.SpotiventBackend.referrals.entity.Referrals;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
@@ -41,6 +42,9 @@ public class Users {
 
     @OneToMany(mappedBy = "user")
     private Set<Referrals> referrals = new LinkedHashSet<>();
+
+//    @OneToMany(mappedBy = "user")
+//    private Set<Points> points = new LinkedHashSet<>();
 
     @NotNull
     @ColumnDefault("CURRENT_TIMESTAMP")
