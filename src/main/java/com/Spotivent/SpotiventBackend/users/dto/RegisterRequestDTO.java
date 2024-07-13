@@ -20,4 +20,6 @@ public class RegisterRequestDTO {
 
     @NotNull
     private String password;
+
+    private String referralCode;
 }
