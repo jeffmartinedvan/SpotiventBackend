@@ -7,6 +7,7 @@ import com.Spotivent.SpotiventBackend.referrals.entity.Referrals;
 import com.Spotivent.SpotiventBackend.transactions.entity.Transactions;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
@@ -27,11 +28,12 @@ public class Users {
     private String avatar;
 
     @NotNull(message = "Email must not be null")
-    @Column(name = "email", nullable = false)
+    @Column(name = "email", nullable = false, length = 100)
+    @Email
     private String email;
 
     @NotNull(message = "Password must not be null")
-    @Column(name = "password", nullable = false)
+    @Column(name = "password", nullable = false, length = 100)
     @JsonIgnore
     private String password;
 
@@ -41,11 +43,11 @@ public class Users {
     private Roles role;
 
     @NotNull(message = "Username must not be null")
-    @Column(name = "username", nullable = false)
+    @Column(name = "username", nullable = false, length = 100)
     private String username;
 
     @NotNull(message = "Referral code must not be null")
-    @Column(name = "referral_code", nullable = false)
+    @Column(name = "referral_code", nullable = false, length = 6)
     private String referralCode;
 
     @NotNull

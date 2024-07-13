@@ -6,4 +6,5 @@ import lombok.Data;
 public class CreateReferralRequestDTO {
     private Long userId;
     private Boolean claimed;
+    private Long referrerId;
 }

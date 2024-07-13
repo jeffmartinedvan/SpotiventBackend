@@ -15,10 +15,10 @@
 //    public ReferralController(ReferralService referralService) {
 //        this.referralService = referralService;
 //    }
-
-//    @GetMapping("api/v1/referral/{id}")
+//
+//    @GetMapping("/{id}")
 //    public ResponseEntity<?> referralCode(@PathVariable String referralCode) {
 //        return ResponseEntity.ok()
 //    }
-
+//
 //}
