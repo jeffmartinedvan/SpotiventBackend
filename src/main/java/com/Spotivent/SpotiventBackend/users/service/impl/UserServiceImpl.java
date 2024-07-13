@@ -13,6 +13,9 @@ import com.Spotivent.SpotiventBackend.users.service.UserService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+import java.util.UUID;
+
 @Service
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
@@ -33,6 +36,7 @@ public class UserServiceImpl implements UserService {
         newUser.setPassword(password);
         newUser.setUsername(registerRequestDTO.getUsername());
         newUser.setRole(registerRequestDTO.getRole());
+        newUser.setReferralCode(UUID.randomUUID().toString().replace("-", "").substring(0,6));
         Users saved = userRepository.save(newUser);
 
         CreateReferralRequestDTO requestDTO = new CreateReferralRequestDTO();
@@ -57,7 +61,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public RegisterResponseDTO getUserById(Long id) {
         Users users = userRepository.findById(id).orElseThrow(() -> new RuntimeException("User not found"));
-        Referrals referrals = referralService.getByUserId(id);
+        Referrals referrals = referralService.getByUsersId(id);
         RegisterResponseDTO response = new RegisterResponseDTO();
         response.setId(users.getId());
         response.setEmail(users.getEmail());

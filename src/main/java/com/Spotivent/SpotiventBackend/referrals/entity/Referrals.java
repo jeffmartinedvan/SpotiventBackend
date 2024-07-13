@@ -18,14 +18,15 @@ public class Referrals {
     @Column(name = "id", nullable = false)
     private long id;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @NotNull
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id", nullable = false)
     @JsonIgnore
-    private Users user;
+    private Users users;
 
-    @NotNull
-    @Column(name = "referral_code", nullable = false)
-    private String referralCode;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "referrer_id")
+    private Users referrerId;
 
     @NotNull
     @Column(name = "claimed", nullable = false)

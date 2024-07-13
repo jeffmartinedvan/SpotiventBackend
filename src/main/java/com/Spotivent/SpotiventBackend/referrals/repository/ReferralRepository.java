@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ReferralRepository extends JpaRepository<Referrals, Long> {
-    Referrals findByUserId(Long id);
+    Referrals findByUsersId(Long id);
 }

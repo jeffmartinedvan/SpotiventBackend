@@ -1,11 +1,13 @@
 package com.Spotivent.SpotiventBackend.events.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import org.hibernate.annotations.ColumnDefault;
 
 import java.time.Instant;
+import java.util.Set;
 
 @Entity
 @Data
@@ -16,7 +18,10 @@ public class Cities {
     @Column(name = "id", nullable = false)
     private Long id;
 
-//    private Events events;
+    @NotNull
+    @OneToOne(mappedBy = "cities", cascade = CascadeType.ALL)
+    @JsonIgnore
+    private Events events;
 
     @NotNull(message = "Event city must not be null")
     @Column(name = "name", nullable = false)
