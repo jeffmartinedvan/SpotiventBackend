@@ -4,7 +4,6 @@ import com.Spotivent.SpotiventBackend.events.entity.Events;
 import com.Spotivent.SpotiventBackend.reviews.entity.Reviews;
 import com.Spotivent.SpotiventBackend.points.entity.Points;
 import com.Spotivent.SpotiventBackend.referrals.entity.Referrals;
-import com.Spotivent.SpotiventBackend.tickets.entity.Tickets;
 import com.Spotivent.SpotiventBackend.transactions.entity.Transactions;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
