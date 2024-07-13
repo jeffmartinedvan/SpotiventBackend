@@ -1,5 +1,6 @@
 package com.Spotivent.SpotiventBackend.points.entity;
 
+import com.Spotivent.SpotiventBackend.transactions.entity.Transactions;
 import com.Spotivent.SpotiventBackend.users.entity.Users;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
@@ -21,10 +22,11 @@ public class Points {
     @Column(name = "point", nullable = false)
     private Long point;
 
-//    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-//    @JoinColumn(name = "user_id", nullable = false)
-//    @JsonIgnore
-//    private Users user;
+    @NotNull
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "user_id", nullable = false)
+    @JsonIgnore
+    private Users users;
 
     @NotNull
     @ColumnDefault("CURRENT_TIMESTAMP")

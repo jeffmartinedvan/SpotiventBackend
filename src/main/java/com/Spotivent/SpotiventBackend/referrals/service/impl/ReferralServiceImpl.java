@@ -8,8 +8,6 @@ import com.Spotivent.SpotiventBackend.users.service.UserService;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
-import java.util.UUID;
-
 @Service
 public class ReferralServiceImpl implements ReferralService {
     private final ReferralRepository referralRepository;
@@ -23,14 +21,13 @@ public class ReferralServiceImpl implements ReferralService {
     @Override
     public Referrals createReferralCode(CreateReferralRequestDTO createReferralRequestDTO) {
         Referrals referrals = new Referrals();
-        referrals.setReferralCode(UUID.randomUUID().toString().replace("-", "").substring(0,6));
-        referrals.setUser(userService.getDetailUser(createReferralRequestDTO.getUserId()));
+        referrals.setUsers(userService.getDetailUser(createReferralRequestDTO.getUserId()));
         referrals.setClaimed(createReferralRequestDTO.getClaimed());
         return referralRepository.save(referrals);
     }
 
     @Override
-    public Referrals getByUserId(Long id) {
-        return referralRepository.findByUserId(id);
+    public Referrals getByUsersId(Long id) {
+        return referralRepository.findByUsersId(id);
     }
 }

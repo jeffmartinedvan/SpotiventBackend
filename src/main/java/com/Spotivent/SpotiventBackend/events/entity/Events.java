@@ -1,5 +1,11 @@
 package com.Spotivent.SpotiventBackend.events.entity;
 
+import com.Spotivent.SpotiventBackend.coupons.entity.Coupons;
+import com.Spotivent.SpotiventBackend.reviews.entity.Reviews;
+import com.Spotivent.SpotiventBackend.tickets.entity.Tickets;
+import com.Spotivent.SpotiventBackend.transactions.entity.Transactions;
+import com.Spotivent.SpotiventBackend.users.entity.Users;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
@@ -8,6 +14,7 @@ import org.hibernate.annotations.ColumnDefault;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Set;
 
 @Entity
 @Data
@@ -18,13 +25,37 @@ public class Events {
     @Column(name = "id", nullable = false)
     private long id;
 
-//    private Cities cities;
+    @NotNull
+    @OneToMany(mappedBy = "events", cascade = CascadeType.ALL)
+    private Set<Reviews> reviews;
 
-//    private Categories categories;
+    @NotNull
+    @OneToMany(mappedBy = "events", cascade = CascadeType.ALL)
+    private Set<Tickets> tickets;
 
-//    private Reviews reviews;
+    @NotNull
+    @OneToMany(mappedBy = "events", cascade = CascadeType.ALL)
+    private Set<Coupons> coupons;
 
-//    private Users users;
+    @NotNull
+    @OneToOne(mappedBy = "events", cascade = CascadeType.ALL)
+    private Transactions transactions;
+
+    @NotNull
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "city_id", referencedColumnName = "id", nullable = false)
+    private Cities cities;
+
+    @NotNull
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "category_id", referencedColumnName = "id", nullable = false)
+    private Categories categories;
+
+    @NotNull
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "user_id", nullable = false)
+    @JsonIgnore
+    private Users users;
 
     @NotNull(message = "Event name must not be null")
     @Column(name = "event_name", nullable = false)

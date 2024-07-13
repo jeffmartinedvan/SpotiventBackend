@@ -1,5 +1,8 @@
-package com.Spotivent.SpotiventBackend.tickets.entity;
+package com.Spotivent.SpotiventBackend.orderItem.entity;
 
+import com.Spotivent.SpotiventBackend.tickets.entity.Tickets;
+import com.Spotivent.SpotiventBackend.transactions.entity.Transactions;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
@@ -10,15 +13,23 @@ import java.time.Instant;
 @Entity
 @Data
 @Table(name = "order_item")
-public class OrderItem {
+public class OrderItems {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
 
-//    private Transactions transactions
+    @NotNull
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "ticket_id", nullable = false)
+    @JsonIgnore
+    private Tickets tickets;
 
-//    private Tickets tickets;
+    @NotNull
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "transaction_id", nullable = false)
+    @JsonIgnore
+    private Transactions transactions;
 
     @NotNull(message = "Qty must not be null")
     @Column(name = "ticket_qty", nullable = false)

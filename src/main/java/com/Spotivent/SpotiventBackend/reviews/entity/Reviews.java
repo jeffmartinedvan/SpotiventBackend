@@ -1,5 +1,8 @@
-package com.Spotivent.SpotiventBackend.events.entity;
+package com.Spotivent.SpotiventBackend.reviews.entity;
 
+import com.Spotivent.SpotiventBackend.events.entity.Events;
+import com.Spotivent.SpotiventBackend.users.entity.Users;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
@@ -16,7 +19,17 @@ public class Reviews {
     @Column(name = "id", nullable = false)
     private Long id;
 
-//    private Events events;
+    @NotNull
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "event_id", nullable = false)
+    @JsonIgnore
+    private Events events;
+
+    @NotNull
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "user_id", nullable = false)
+    @JsonIgnore
+    private Users users;
 
     @NotNull(message = "Rating must not be null")
     @Column(name = "ratings", nullable = false)

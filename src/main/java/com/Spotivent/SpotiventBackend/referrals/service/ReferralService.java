@@ -7,5 +7,5 @@ import org.springframework.stereotype.Service;
 @Service
 public interface ReferralService {
     Referrals createReferralCode(CreateReferralRequestDTO createReferralRequestDTO);
-    Referrals getByUserId(Long id);
+    Referrals getByUsersId(Long id);
 }

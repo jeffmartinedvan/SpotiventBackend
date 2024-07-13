@@ -1,14 +1,18 @@
 package com.Spotivent.SpotiventBackend.users.entity;
 
+import com.Spotivent.SpotiventBackend.events.entity.Events;
+import com.Spotivent.SpotiventBackend.reviews.entity.Reviews;
 import com.Spotivent.SpotiventBackend.points.entity.Points;
 import com.Spotivent.SpotiventBackend.referrals.entity.Referrals;
+import com.Spotivent.SpotiventBackend.tickets.entity.Tickets;
+import com.Spotivent.SpotiventBackend.transactions.entity.Transactions;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 
 import java.time.Instant;
-import java.util.LinkedHashSet;
 import java.util.Set;
 
 @Entity
@@ -29,6 +33,7 @@ public class Users {
 
     @NotNull(message = "Password must not be null")
     @Column(name = "password", nullable = false)
+    @JsonIgnore
     private String password;
 
     @NotNull(message = "Role must not be null")
@@ -40,11 +45,29 @@ public class Users {
     @Column(name = "username", nullable = false)
     private String username;
 
-    @OneToMany(mappedBy = "user")
-    private Set<Referrals> referrals = new LinkedHashSet<>();
+    @NotNull(message = "Referral code must not be null")
+    @Column(name = "referral_code", nullable = false)
+    private String referralCode;
 
-//    @OneToMany(mappedBy = "user")
-//    private Set<Points> points = new LinkedHashSet<>();
+    @NotNull
+    @OneToOne(mappedBy = "users", cascade = CascadeType.ALL)
+    private Referrals referrals;
+
+    @NotNull
+    @OneToMany(mappedBy = "users", cascade = CascadeType.ALL)
+    private Set<Points> points;
+
+    @NotNull
+    @OneToMany(mappedBy = "users", cascade = CascadeType.ALL)
+    private Set<Events> events;
+
+    @NotNull
+    @OneToMany(mappedBy = "users", cascade = CascadeType.ALL)
+    private Set<Transactions> transactions;
+
+    @NotNull
+    @OneToMany(mappedBy = "users", cascade = CascadeType.ALL)
+    private Set<Reviews> reviews;
 
     @NotNull
     @ColumnDefault("CURRENT_TIMESTAMP")
