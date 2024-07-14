@@ -25,33 +25,26 @@ public class Events {
     @Column(name = "id", nullable = false)
     private long id;
 
-    @NotNull
     @OneToMany(mappedBy = "events", cascade = CascadeType.ALL)
     private Set<Reviews> reviews;
 
-    @NotNull
     @OneToMany(mappedBy = "events", cascade = CascadeType.ALL)
     private Set<Tickets> tickets;
 
-    @NotNull
     @OneToMany(mappedBy = "events", cascade = CascadeType.ALL)
     private Set<Coupons> coupons;
 
-    @NotNull
     @OneToOne(mappedBy = "events", cascade = CascadeType.ALL)
     private Transactions transactions;
 
-    @NotNull
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "city_id", referencedColumnName = "id", nullable = false)
     private Cities cities;
 
-    @NotNull
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "category_id", referencedColumnName = "id", nullable = false)
     private Categories categories;
 
-    @NotNull
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "user_id", nullable = false)
     @JsonIgnore

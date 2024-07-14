@@ -21,13 +21,11 @@ public class Tickets {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @NotNull
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "event_id", nullable = false)
     @JsonIgnore
     private Events events;
 
-    @NotNull
     @OneToMany(mappedBy = "tickets", cascade = CascadeType.ALL)
     private Set<OrderItems> orderItems;
 

@@ -18,7 +18,6 @@ public class Cities {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @NotNull
     @OneToOne(mappedBy = "cities", cascade = CascadeType.ALL)
     @JsonIgnore
     private Events events;

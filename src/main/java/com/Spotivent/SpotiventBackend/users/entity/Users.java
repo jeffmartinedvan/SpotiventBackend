@@ -50,23 +50,18 @@ public class Users {
     @Column(name = "referral_code", nullable = false, length = 6)
     private String referralCode;
 
-    @NotNull
     @OneToOne(mappedBy = "users", cascade = CascadeType.ALL)
     private Referrals referrals;
 
-    @NotNull
     @OneToMany(mappedBy = "users", cascade = CascadeType.ALL)
     private Set<Points> points;
 
-    @NotNull
     @OneToMany(mappedBy = "users", cascade = CascadeType.ALL)
     private Set<Events> events;
 
-    @NotNull
     @OneToMany(mappedBy = "users", cascade = CascadeType.ALL)
     private Set<Transactions> transactions;
 
-    @NotNull
     @OneToMany(mappedBy = "users", cascade = CascadeType.ALL)
     private Set<Reviews> reviews;
 

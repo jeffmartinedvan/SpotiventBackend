@@ -22,7 +22,6 @@ public class Points {
     @Column(name = "point", nullable = false)
     private Long point;
 
-    @NotNull
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "user_id", nullable = false)
     @JsonIgnore

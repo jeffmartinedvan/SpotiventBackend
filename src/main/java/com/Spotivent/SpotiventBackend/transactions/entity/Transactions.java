@@ -22,17 +22,14 @@ public class Transactions {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @NotNull
     @OneToMany(mappedBy = "transactions", cascade = CascadeType.ALL)
     private Set<OrderItems> orderItems;
 
-    @NotNull
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "user_id", nullable = false)
     @JsonIgnore
     private Users users;
 
-    @NotNull
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "event_id", nullable = false)
     @JsonIgnore
