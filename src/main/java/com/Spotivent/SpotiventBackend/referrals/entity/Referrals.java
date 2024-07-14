@@ -25,6 +25,7 @@ public class Referrals {
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "referrer_id")
+    @JsonIgnore
     private Users referrerId;
 
     @NotNull
@@ -34,14 +35,17 @@ public class Referrals {
     @NotNull
     @ColumnDefault("CURRENT_TIMESTAMP")
     @Column(name = "created_at", nullable = false)
+    @JsonIgnore
     private Instant createdAt;
 
     @NotNull
     @ColumnDefault("CURRENT_TIMESTAMP")
     @Column(name = "updated_at", nullable = false)
+    @JsonIgnore
     private Instant updatedAt;
 
     @Column(name = "deleted_at")
+    @JsonIgnore
     private Instant deletedAt;
 
     @PrePersist

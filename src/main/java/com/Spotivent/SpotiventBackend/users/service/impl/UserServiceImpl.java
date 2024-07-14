@@ -47,7 +47,6 @@ public class UserServiceImpl implements UserService {
         RegisterResponseDTO response = new RegisterResponseDTO();
         response.setId(saved.getId());
         response.setReferralCode(saved.getReferralCode());
-        response.setReferrals(referralService.getByUsersId(saved.getId()));
         response.setEmail(saved.getEmail());
         response.setRole(saved.getRole());
         response.setAvatar(saved.getAvatar());
@@ -65,7 +64,7 @@ public class UserServiceImpl implements UserService {
         response.setRole(users.getRole());
         response.setAvatar(users.getAvatar());
         response.setUsername(users.getUsername());
-        response.setReferrals(referrals);
+        response.setReferralCode(users.getReferralCode());
         return response;
     }
 
