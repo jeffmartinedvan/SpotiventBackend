@@ -17,7 +17,6 @@ public class Categories {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull
     @OneToOne(mappedBy = "categories", cascade = CascadeType.ALL)
     @JsonIgnore
     private Events events;

@@ -18,7 +18,6 @@ public class Referrals {
     @Column(name = "id", nullable = false)
     private long id;
 
-    @NotNull
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id", nullable = false)
     @JsonIgnore
