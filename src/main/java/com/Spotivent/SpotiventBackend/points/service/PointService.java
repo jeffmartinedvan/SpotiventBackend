@@ -8,4 +8,5 @@ import org.springframework.stereotype.Service;
 @Service
 public interface PointService {
     Points createPoints(CreatePointRequestDTO createPointRequestDTO);
+    Points getByUsersId(Long id);
 }
