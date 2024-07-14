@@ -1,6 +1,5 @@
 package com.Spotivent.SpotiventBackend.users.service.impl;
 
-import com.Spotivent.SpotiventBackend.points.service.PointService;
 import com.Spotivent.SpotiventBackend.referrals.dto.CreateReferralRequestDTO;
 import com.Spotivent.SpotiventBackend.referrals.entity.Referrals;
 import com.Spotivent.SpotiventBackend.referrals.service.ReferralService;
@@ -19,13 +18,11 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final ReferralService referralService;
-    private final PointService pointService;
 
-    public UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder, ReferralService referralService, PointService pointService) {
+    public UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder, ReferralService referralService) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.referralService = referralService;
-        this.pointService = pointService;
     }
 
     @Override
