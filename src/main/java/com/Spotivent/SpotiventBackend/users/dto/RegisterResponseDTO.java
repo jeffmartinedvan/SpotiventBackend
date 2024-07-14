@@ -13,5 +13,6 @@ public class RegisterResponseDTO {
     private String email;
     private Roles role;
     private String username;
+    private String referralCode;
     private Referrals referrals;
 }

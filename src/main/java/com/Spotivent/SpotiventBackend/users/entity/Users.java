@@ -53,15 +53,19 @@ public class Users {
     @OneToOne(mappedBy = "users", cascade = CascadeType.ALL)
     private Referrals referrals;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "users", cascade = CascadeType.ALL)
     private Set<Points> points;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "users", cascade = CascadeType.ALL)
     private Set<Events> events;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "users", cascade = CascadeType.ALL)
     private Set<Transactions> transactions;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "users", cascade = CascadeType.ALL)
     private Set<Reviews> reviews;
 

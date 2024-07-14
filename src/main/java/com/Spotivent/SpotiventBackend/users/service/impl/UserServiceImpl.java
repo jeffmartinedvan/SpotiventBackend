@@ -42,11 +42,11 @@ public class UserServiceImpl implements UserService {
             requestDTO.setClaimed(false);
             requestDTO.setReferrerId(referrer.getId());
             referralService.createReferralCode(requestDTO);
-
         }
 
         RegisterResponseDTO response = new RegisterResponseDTO();
         response.setId(saved.getId());
+        response.setReferralCode(saved.getReferralCode());
         response.setReferrals(referralService.getByUsersId(saved.getId()));
         response.setEmail(saved.getEmail());
         response.setRole(saved.getRole());
