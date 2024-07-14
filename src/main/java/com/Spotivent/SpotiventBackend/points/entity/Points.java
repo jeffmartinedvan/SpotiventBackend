@@ -1,6 +1,5 @@
 package com.Spotivent.SpotiventBackend.points.entity;
 
-import com.Spotivent.SpotiventBackend.transactions.entity.Transactions;
 import com.Spotivent.SpotiventBackend.users.entity.Users;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;

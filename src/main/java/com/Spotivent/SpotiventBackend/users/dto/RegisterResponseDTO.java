@@ -1,6 +1,5 @@
 package com.Spotivent.SpotiventBackend.users.dto;
 
-import com.Spotivent.SpotiventBackend.referrals.entity.Referrals;
 import com.Spotivent.SpotiventBackend.users.entity.Roles;
 import lombok.Data;
 
