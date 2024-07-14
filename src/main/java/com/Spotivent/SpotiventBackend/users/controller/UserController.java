@@ -3,7 +3,6 @@ package com.Spotivent.SpotiventBackend.users.controller;
 import com.Spotivent.SpotiventBackend.response.Response;
 import com.Spotivent.SpotiventBackend.users.dto.RegisterRequestDTO;
 import com.Spotivent.SpotiventBackend.users.service.UserService;
-import lombok.extern.java.Log;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
