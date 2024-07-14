@@ -23,7 +23,7 @@ public class ReferralServiceImpl implements ReferralService {
         Referrals referrals = new Referrals();
         referrals.setUsers(userService.getDetailUser(createReferralRequestDTO.getUserId()));
         referrals.setClaimed(createReferralRequestDTO.getClaimed());
-        referrals.setReferrerId(userService.getDetailUser(createReferralRequestDTO.getReferrerId()));
+        referrals.setReferrerId(referrals.getId());
         return referralRepository.save(referrals);
     }
 

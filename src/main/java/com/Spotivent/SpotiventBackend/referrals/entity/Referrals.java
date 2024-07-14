@@ -23,10 +23,10 @@ public class Referrals {
     @JsonIgnore
     private Users users;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "referrer_id")
+    @NotNull
+    @Column(name = "referrer_id", nullable = false)
     @JsonIgnore
-    private Users referrerId;
+    private Long referrerId;
 
     @NotNull
     @Column(name = "claimed", nullable = false)
