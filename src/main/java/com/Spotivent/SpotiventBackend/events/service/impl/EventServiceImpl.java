@@ -91,6 +91,7 @@ public class EventServiceImpl implements EventService {
 
     public EventResponseDTO mapToEventResponseDTO(Events events) {
         EventResponseDTO responseDTO = new EventResponseDTO();
+        responseDTO.setId(events.getId());
         responseDTO.setEventName(events.getEventName());
         responseDTO.setCityName(events.getCity().getName());
         responseDTO.setCategoryName(events.getCategory().getName());
