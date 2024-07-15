@@ -72,7 +72,7 @@ public class TicketServiceImpl implements TicketService {
     private void validateOrganizerRole(Authentication authentication) {
         if (authentication.getAuthorities().stream()
                 .map(GrantedAuthority::getAuthority)
-                .noneMatch(role -> role.equals(Roles.Organizer.name()))){
+                .noneMatch(role -> role.equals(Roles.ORGANIZER.name()))){
             throw new ApplicationException("Only organizers can perform this action");
         }
     }

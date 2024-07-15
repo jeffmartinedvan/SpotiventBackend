@@ -39,7 +39,7 @@ public class UserServiceImpl implements UserService {
         newUser.setPassword(passwordEncoder.encode(registerRequestDTO.getPassword()));
         newUser.setUsername(registerRequestDTO.getUsername());
         newUser.setRole(registerRequestDTO.getRole());
-        if (registerRequestDTO.getRole() == Roles.User) {
+        if (registerRequestDTO.getRole() == Roles.USER) {
             newUser.setReferralCode(UUID.randomUUID().toString().replace("-", "").substring(0, 6));
         }
         Users saved = userRepository.save(newUser);
