@@ -85,8 +85,8 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public Events getDetailEvent(Long id) {
-        return eventRepository.findById(id).orElseThrow(() -> new RuntimeException("Event not found"));
+    public Events getEventById(Long eventId) {
+        return eventRepository.findById(eventId).orElseThrow(() -> new RuntimeException("Event not found"));
     }
 
     public EventResponseDTO mapToEventResponseDTO(Events events) {
