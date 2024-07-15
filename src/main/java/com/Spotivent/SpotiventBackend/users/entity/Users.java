@@ -46,8 +46,7 @@ public class Users {
     @Column(name = "username", nullable = false, length = 100)
     private String username;
 
-    @NotNull(message = "Referral code must not be null")
-    @Column(name = "referral_code", nullable = false, length = 6)
+    @Column(name = "referral_code")
     private String referralCode;
 
     @OneToOne(mappedBy = "users", cascade = CascadeType.ALL)

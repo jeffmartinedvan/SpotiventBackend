@@ -8,17 +8,13 @@ import lombok.Data;
 
 @Data
 public class RegisterRequestDTO {
-    @NotNull
     @Enumerated(EnumType.STRING)
     private Roles role;
 
-    @NotNull
     private String username;
 
-    @NotNull
     private String email;
 
-    @NotNull
     private String password;
 
     private String referralCode;

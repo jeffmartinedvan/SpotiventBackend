@@ -7,25 +7,23 @@ import lombok.Data;
 import org.hibernate.annotations.ColumnDefault;
 
 import java.time.Instant;
-import java.util.Set;
 
 @Entity
 @Data
-@Table(name = "cities")
-public class Cities {
+@Table(name = "category")
+public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @OneToOne(mappedBy = "cities", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "category", cascade = CascadeType.ALL)
     @JsonIgnore
     private Events events;
 
-    @NotNull(message = "Event city must not be null")
+    @NotNull(message = "Event category must not be null")
     @Column(name = "name", nullable = false)
-    @Enumerated(EnumType.STRING)
-    private CityEnum city;
+    private String name;
 
     @NotNull
     @ColumnDefault("CURRENT_TIMESTAMP")

@@ -39,11 +39,11 @@ public class Events {
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "city_id", referencedColumnName = "id", nullable = false)
-    private Cities cities;
+    private City city;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "category_id", referencedColumnName = "id", nullable = false)
-    private Categories categories;
+    private Category category;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "user_id", nullable = false)
@@ -54,8 +54,7 @@ public class Events {
     @Column(name = "event_name", nullable = false)
     private String eventName;
 
-    @NotNull(message = "Thumbnail must not be null")
-    @Column(name = "thumbnail", nullable = false)
+    @Column(name = "thumbnail")
     private String thumbnail;
 
     @Column(name = "image")

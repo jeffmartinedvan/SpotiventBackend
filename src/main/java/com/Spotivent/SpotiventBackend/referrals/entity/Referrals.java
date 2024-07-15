@@ -30,7 +30,7 @@ public class Referrals {
 
     @NotNull
     @Column(name = "claimed", nullable = false)
-    private boolean claimed;
+    private Boolean claimed;
 
     @NotNull
     @ColumnDefault("CURRENT_TIMESTAMP")

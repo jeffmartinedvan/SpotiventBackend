@@ -1,7 +1,6 @@
 package com.Spotivent.SpotiventBackend.events.dto;
 
-import com.Spotivent.SpotiventBackend.events.entity.Categories;
-import com.Spotivent.SpotiventBackend.events.entity.Cities;
+import com.Spotivent.SpotiventBackend.events.entity.Category;
 import lombok.Data;
 
 import java.time.LocalDate;
@@ -11,8 +10,8 @@ import java.time.LocalTime;
 public class EventResponseDTO {
     private Long id;
     private String eventName;
-    private Cities cities;
-    private Categories categories;
+    private String cityName;
+    private String categoryName;
     private String thumbnail;
     private String image;
     private String location;
