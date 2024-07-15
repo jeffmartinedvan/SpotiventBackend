@@ -46,7 +46,7 @@ public class EventServiceImpl implements EventService {
     @Override
     public EventResponseDTO createEvent(CreateEventRequestDTO createEventRequestDTO, String email) {
         Users users = userService.findByEmail(email);
-        if (!users.getRole().name().equals(Roles.Organizer.name())) {
+        if (!users.getRole().name().equals(Roles.ORGANIZER.name())) {
             throw new ApplicationException("Only Organizer can create events");
         }
 
