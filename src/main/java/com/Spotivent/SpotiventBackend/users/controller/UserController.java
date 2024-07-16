@@ -2,6 +2,7 @@ package com.Spotivent.SpotiventBackend.users.controller;
 
 import com.Spotivent.SpotiventBackend.response.Response;
 import com.Spotivent.SpotiventBackend.users.dto.RegisterRequestDTO;
+import com.Spotivent.SpotiventBackend.users.dto.RegisterResponseDTO;
 import com.Spotivent.SpotiventBackend.users.service.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -18,12 +19,12 @@ public class UserController {
     }
 
     @GetMapping("/profile/{id}")
-    public ResponseEntity<?> getProfileById(@PathVariable Long id) {
+    public ResponseEntity<Response<RegisterResponseDTO>> getProfileById(@PathVariable Long id) {
         return Response.success("Get profile success", userService.getUserById(id));
     }
 
     @PostMapping("/register")
-    public ResponseEntity<?> register(@RequestBody RegisterRequestDTO registerRequestDTO) {
+    public ResponseEntity<Response<RegisterResponseDTO>> register(@RequestBody RegisterRequestDTO registerRequestDTO) {
         return Response.success("User registered successfully", userService.register(registerRequestDTO));
     }
 }
