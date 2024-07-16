@@ -24,6 +24,10 @@ public class Coupons {
     @JsonIgnore
     private Events events;
 
+    @NotNull(message = "Coupon name must not be null")
+    @Column(name = "name", nullable = false)
+    private String name;
+
     @NotNull(message = "Discount must not be null")
     @Column(name = "discounts", nullable = false)
     private Double discounts;
