@@ -5,7 +5,6 @@ import com.Spotivent.SpotiventBackend.tickets.dto.CreateTicketRequestDTO;
 import com.Spotivent.SpotiventBackend.tickets.dto.TicketResponseDTO;
 import com.Spotivent.SpotiventBackend.tickets.service.TicketService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,18 +24,18 @@ public class TicketController {
     }
 
     @PostMapping
-    public ResponseEntity<Response<TicketResponseDTO>> createTicket(@RequestBody CreateTicketRequestDTO request, Authentication authentication) {
-        return Response.success("Ticket created successfully", ticketService.createTicket(request, authentication));
+    public ResponseEntity<Response<TicketResponseDTO>> createTicket(@RequestBody CreateTicketRequestDTO request) {
+        return Response.success("Ticket created successfully", ticketService.createTicket(request));
     }
 
     @PutMapping("/{ticketId}")
-    public ResponseEntity<Response<TicketResponseDTO>> updateTicket(@PathVariable Long ticketId, @RequestBody CreateTicketRequestDTO request, Authentication authentication) {
-        return Response.success("Ticket updated successfully", ticketService.updateTicket(ticketId, request, authentication));
+    public ResponseEntity<Response<TicketResponseDTO>> updateTicket(@PathVariable Long ticketId, @RequestBody CreateTicketRequestDTO request) {
+        return Response.success("Ticket updated successfully", ticketService.updateTicket(ticketId, request));
     }
 
     @DeleteMapping("/{ticketId}")
-    public ResponseEntity<Response<Void>> deleteTicket(@PathVariable Long ticketId, Authentication authentication) {
-        ticketService.deleteTicket(ticketId, authentication);
+    public ResponseEntity<Response<Void>> deleteTicket(@PathVariable Long ticketId) {
+        ticketService.deleteTicket(ticketId);
         return Response.success("Ticket deleted successfully", null);
     }
 }

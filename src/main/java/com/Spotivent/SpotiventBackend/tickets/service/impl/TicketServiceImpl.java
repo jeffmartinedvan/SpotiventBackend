@@ -8,9 +8,6 @@ import com.Spotivent.SpotiventBackend.tickets.dto.TicketResponseDTO;
 import com.Spotivent.SpotiventBackend.tickets.entity.Tickets;
 import com.Spotivent.SpotiventBackend.tickets.repository.TicketRepository;
 import com.Spotivent.SpotiventBackend.tickets.service.TicketService;
-import com.Spotivent.SpotiventBackend.users.entity.Roles;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -37,8 +34,7 @@ public class TicketServiceImpl implements TicketService {
     }
 
     @Override
-    public TicketResponseDTO createTicket(CreateTicketRequestDTO request, Authentication authentication) {
-        validateOrganizerRole(authentication);
+    public TicketResponseDTO createTicket(CreateTicketRequestDTO request) {
         Events event = eventService.getEventById(request.getEventId());
         Tickets tickets = new Tickets();
         tickets.setType(request.getType());
@@ -50,8 +46,7 @@ public class TicketServiceImpl implements TicketService {
     }
 
     @Override
-    public TicketResponseDTO updateTicket(Long ticketId, CreateTicketRequestDTO request, Authentication authentication) {
-        validateOrganizerRole(authentication);
+    public TicketResponseDTO updateTicket(Long ticketId, CreateTicketRequestDTO request) {
         Tickets tickets = ticketRepository.findById(ticketId)
                 .orElseThrow(() -> new ApplicationException("Ticket not found"));
         tickets.setType(request.getType());
@@ -62,19 +57,20 @@ public class TicketServiceImpl implements TicketService {
     }
 
     @Override
-    public void deleteTicket(Long ticketId, Authentication authentication) {
-        validateOrganizerRole(authentication);
-        Tickets tickets = ticketRepository.findById(ticketId)
-                .orElseThrow(() -> new ApplicationException("Ticket not found"));
+    public void deleteTicket(Long ticketId) {
+        Tickets tickets = ticketRepository.findById(ticketId).orElseThrow(() -> new ApplicationException("Ticket not found"));
         ticketRepository.delete(tickets);
     }
 
-    private void validateOrganizerRole(Authentication authentication) {
-        if (authentication.getAuthorities().stream()
-                .map(GrantedAuthority::getAuthority)
-                .noneMatch(role -> role.equals(Roles.ORGANIZER.name()))){
-            throw new ApplicationException("Only organizers can perform this action");
-        }
+    @Override
+    public TicketResponseDTO findTicketById(Long ticketId) {
+        Tickets tickets = ticketRepository.findById(ticketId).orElseThrow(() -> new ApplicationException("Ticket not found"));
+        return mapToTicketResponseDTO(tickets);
+    }
+
+    @Override
+    public Tickets getDetailTicket(Long ticketId) {
+        return ticketRepository.findById(ticketId).orElseThrow(() -> new ApplicationException("Ticket not found"));
     }
 
     private TicketResponseDTO mapToTicketResponseDTO(Tickets tickets) {
