@@ -23,7 +23,7 @@ public class TicketController {
         return Response.success("Get all tickets success", ticketService.getAllTickets(eventId));
     }
 
-    @PostMapping
+    @PostMapping("/create")
     public ResponseEntity<Response<TicketResponseDTO>> createTicket(@RequestBody CreateTicketRequestDTO request) {
         return Response.success("Ticket created successfully", ticketService.createTicket(request));
     }

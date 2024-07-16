@@ -39,7 +39,7 @@ public class EventController {
                 eventName, city, category, userId, upcoming));
     }
 
-    @PostMapping
+    @PostMapping("/create")
     public ResponseEntity<Response<EventResponseDTO>> createEvent(@RequestBody CreateEventRequestDTO createEventRequestDTO) {
         String email = (String) Claims.getClaims().get("sub");
         return Response.success("Event created successfully", eventService.createEvent(createEventRequestDTO,email));
