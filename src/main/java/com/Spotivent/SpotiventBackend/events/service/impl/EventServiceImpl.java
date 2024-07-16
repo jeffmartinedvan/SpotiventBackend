@@ -46,9 +46,6 @@ public class EventServiceImpl implements EventService {
     @Override
     public EventResponseDTO createEvent(CreateEventRequestDTO createEventRequestDTO, String email) {
         Users users = userService.findByEmail(email);
-        if (!users.getRole().name().equals(Roles.ORGANIZER.name())) {
-            throw new ApplicationException("Only Organizer can create events");
-        }
 
         City city = cityRepository.findByName(createEventRequestDTO.getCityName());
         if (city == null) {
@@ -74,14 +71,7 @@ public class EventServiceImpl implements EventService {
         newEvent.setIsFree(createEventRequestDTO.getIsFree());
         newEvent.setUsers(users);
         Events savedEvent = eventRepository.save(newEvent);
-
         return mapToEventResponseDTO(savedEvent);
-    }
-
-    @Override
-    public EventResponseDTO getUserById(Long id) {
-        Events events = eventRepository.findById(id).orElseThrow(() -> new RuntimeException("Event not found"));
-        return mapToEventResponseDTO(events);
     }
 
     @Override

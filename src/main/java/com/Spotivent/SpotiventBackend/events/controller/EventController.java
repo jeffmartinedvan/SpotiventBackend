@@ -33,7 +33,7 @@ public class EventController {
             @RequestParam(required = false) Long userId,
             @RequestParam(required = false) String upcoming,
             @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "12") int size) {
+            @RequestParam(defaultValue = "8") int size) {
         Pageable pageable = PageRequest.of(page, size);
         return Response.success("All events fetched", eventService.getAllEvents(pageable,
                 eventName, city, category, userId, upcoming));
