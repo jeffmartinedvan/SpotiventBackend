@@ -1,5 +1,6 @@
 package com.Spotivent.SpotiventBackend.auth.service.impl;
 
+import com.Spotivent.SpotiventBackend.auth.dto.LoginResponseDto;
 import com.Spotivent.SpotiventBackend.auth.service.AuthService;
 import com.Spotivent.SpotiventBackend.users.repository.UserRepository;
 import org.springframework.security.core.Authentication;
@@ -26,7 +27,7 @@ public class AuthServiceImpl implements AuthService {
         this.userRepository = userRepository;
     }
 
-    public String generateToken(Authentication authentication) {
+    public LoginResponseDto generateToken(Authentication authentication) {
         Instant now = Instant.now();
 
         String scope = authentication.getAuthorities()
@@ -42,6 +43,11 @@ public class AuthServiceImpl implements AuthService {
                 .claim("scope", scope)
                 .build();
 
-        return jwtEncoder.encode(JwtEncoderParameters.from(claims)).getTokenValue();
+        var token = jwtEncoder.encode(JwtEncoderParameters.from(claims)).getTokenValue();
+        LoginResponseDto responseDto = new LoginResponseDto();
+        responseDto.setToken(token);
+        responseDto.setRole(scope);
+        responseDto.setMessage("User logged in successfully");
+        return responseDto;
     }
 }

@@ -1,7 +1,8 @@
 package com.Spotivent.SpotiventBackend.auth.service;
 
+import com.Spotivent.SpotiventBackend.auth.dto.LoginResponseDto;
 import org.springframework.security.core.Authentication;
 
 public interface AuthService {
-    String generateToken(Authentication authentication);
+    LoginResponseDto generateToken(Authentication authentication);
 }

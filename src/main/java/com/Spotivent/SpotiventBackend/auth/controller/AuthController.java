@@ -45,15 +45,11 @@ public class AuthController {
 
         UserAuth userDetails = (UserAuth) authentication.getPrincipal();
         log.info("Token requested for user :" + userDetails.getUsername() + " with roles: " + userDetails.getAuthorities().toArray()[0]);
-        String token = authService.generateToken(authentication);
+        LoginResponseDto data = authService.generateToken(authentication);
 
-        LoginResponseDto response = new LoginResponseDto();
-        response.setMessage("User logged in successfully");
-        response.setToken(token);
-
-        Cookie cookie = new Cookie("sid", token);
+        Cookie cookie = new Cookie("sid", data.getToken());
         HttpHeaders headers = new HttpHeaders();
         headers.add("Set-Cookie", cookie.getName() + "=" + cookie.getValue() + "; Path=/; HttpOnly");
-        return ResponseEntity.status(HttpStatus.OK).headers(headers).body(response);
+        return ResponseEntity.status(HttpStatus.OK).headers(headers).body(data);
     }
 }
