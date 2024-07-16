@@ -4,7 +4,6 @@ import com.Spotivent.SpotiventBackend.exception.ApplicationException;
 import com.Spotivent.SpotiventBackend.points.dto.CreatePointRequestDTO;
 import com.Spotivent.SpotiventBackend.points.service.PointService;
 import com.Spotivent.SpotiventBackend.referrals.dto.CreateReferralRequestDTO;
-import com.Spotivent.SpotiventBackend.referrals.entity.Referrals;
 import com.Spotivent.SpotiventBackend.referrals.service.ReferralService;
 import com.Spotivent.SpotiventBackend.users.dto.RegisterRequestDTO;
 import com.Spotivent.SpotiventBackend.users.dto.RegisterResponseDTO;
@@ -16,6 +15,8 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
 import java.util.UUID;
 
 @Service
@@ -56,6 +57,7 @@ public class UserServiceImpl implements UserService {
             CreatePointRequestDTO pointRequestDTO = new CreatePointRequestDTO();
             pointRequestDTO.setPoint(10000L);
             pointRequestDTO.setUserId(referrer.getId());
+            pointRequestDTO.setExpirationDate(Instant.now().plus(90, ChronoUnit.DAYS));
             pointService.createPoints(pointRequestDTO);
         }
         return mapToRegisterResponseDTO(saved);

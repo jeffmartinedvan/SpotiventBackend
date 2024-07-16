@@ -9,7 +9,10 @@ import com.Spotivent.SpotiventBackend.users.service.UserService;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class PointServiceImpl implements PointService {
@@ -22,11 +25,12 @@ public class PointServiceImpl implements PointService {
     }
 
     @Override
-    public Points createPoints(CreatePointRequestDTO createPointRequestDTO) {
+    public PointResponseDTO createPoints(CreatePointRequestDTO createPointRequestDTO) {
         Points points = new Points();
         points.setUsers(userService.getDetailUser(createPointRequestDTO.getUserId()));
         points.setPoint(createPointRequestDTO.getPoint());
-        return pointRepository.save(points);
+        points.setExpirationDate(createPointRequestDTO.getExpirationDate());
+        return mapToPointResponseDTO(pointRepository.save(points));
     }
 
     @Override
@@ -35,11 +39,20 @@ public class PointServiceImpl implements PointService {
         return pointsList.stream().mapToLong(Points::getPoint).sum();
     }
 
+    @Override
+    public List<PointResponseDTO> getAllPointsByUserId(Long userId) {
+        List<Points> pointsList = pointRepository.findAllByUsersId(userId);
+        return pointsList.stream()
+                .map(this::mapToPointResponseDTO)
+                .collect(Collectors.toList());
+    }
+
     public PointResponseDTO mapToPointResponseDTO(Points points) {
         PointResponseDTO responseDTO = new PointResponseDTO();
         responseDTO.setId(points.getId());
         responseDTO.setUserId(points.getUsers().getId());
         responseDTO.setPoint(points.getPoint());
+        responseDTO.setExpirationDate(points.getExpirationDate());
         return responseDTO;
     }
 }

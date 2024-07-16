@@ -7,6 +7,7 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import org.hibernate.annotations.ColumnDefault;
 import java.time.Instant;
+import java.time.temporal.ChronoUnit;
 
 @Entity
 @Data
@@ -36,13 +37,16 @@ public class Points {
     @Column(name = "updated_at", nullable = false)
     private Instant updatedAt;
 
-    @Column(name = "deleted_at")
-    private Instant deletedAt;
+    @Column(name = "expiration_date")
+    private Instant expirationDate;
 
     @PrePersist
     public void prePersist() {
         this.createdAt = Instant.now();
         this.updatedAt = Instant.now();
+        if (this.expirationDate == null) {
+            this.expirationDate = Instant.now().plus(90, ChronoUnit.DAYS);
+        }
     }
 
     @PreUpdate
@@ -50,8 +54,4 @@ public class Points {
         this.updatedAt = Instant.now();
     }
 
-    @PreRemove
-    public void preRemove() {
-        this.deletedAt = Instant.now();
-    }
 }
