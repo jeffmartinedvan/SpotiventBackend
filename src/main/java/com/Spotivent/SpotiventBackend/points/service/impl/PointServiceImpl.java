@@ -1,6 +1,7 @@
 package com.Spotivent.SpotiventBackend.points.service.impl;
 
 import com.Spotivent.SpotiventBackend.points.dto.CreatePointRequestDTO;
+import com.Spotivent.SpotiventBackend.points.dto.PointResponseDTO;
 import com.Spotivent.SpotiventBackend.points.entity.Points;
 import com.Spotivent.SpotiventBackend.points.repository.PointRepository;
 import com.Spotivent.SpotiventBackend.points.service.PointService;
@@ -8,7 +9,8 @@ import com.Spotivent.SpotiventBackend.users.service.UserService;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
-import java.awt.*;
+import java.util.List;
+
 @Service
 public class PointServiceImpl implements PointService {
     private final PointRepository pointRepository;
@@ -28,7 +30,16 @@ public class PointServiceImpl implements PointService {
     }
 
     @Override
-    public Points getByUsersId(Long id) {
-        return pointRepository.findByUsersId(id);
+    public Long getTotalPointsByUserId(Long userId) {
+        List<Points> pointsList = pointRepository.findAllByUsersId(userId);
+        return pointsList.stream().mapToLong(Points::getPoint).sum();
+    }
+
+    public PointResponseDTO mapToPointResponseDTO(Points points) {
+        PointResponseDTO responseDTO = new PointResponseDTO();
+        responseDTO.setId(points.getId());
+        responseDTO.setUserId(points.getUsers().getId());
+        responseDTO.setPoint(points.getPoint());
+        return responseDTO;
     }
 }

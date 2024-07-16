@@ -20,7 +20,7 @@ public class PointController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> getPointByUserId(@PathVariable Long id) {
-        return Response.success("Get point success", pointService.getByUsersId(id));
+    public ResponseEntity<Response<Long>> getTotalPointsByUserId(@PathVariable Long id) {
+        return Response.success("Get point success", pointService.getTotalPointsByUserId(id));
     }
 }
