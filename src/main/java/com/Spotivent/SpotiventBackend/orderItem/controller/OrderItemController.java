@@ -5,7 +5,6 @@ import com.Spotivent.SpotiventBackend.orderItem.dto.OrderItemResponseDTO;
 import com.Spotivent.SpotiventBackend.orderItem.service.OrderItemService;
 import com.Spotivent.SpotiventBackend.response.Response;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,9 +18,9 @@ public class OrderItemController {
         this.orderItemService = orderItemService;
     }
 
-    @PostMapping
-    public ResponseEntity<Response<OrderItemResponseDTO>> createOrderItem(@RequestBody CreateOrderItemRequestDTO requestDTO, @RequestParam Long transactionId, Authentication authentication) {
-        return Response.success("Create order item success", orderItemService.createOrderItem(requestDTO, transactionId));
+    @PostMapping("/create")
+    public ResponseEntity<Response<OrderItemResponseDTO>> createOrderItem(@RequestBody CreateOrderItemRequestDTO requestDTO) {
+        return Response.success("Create order item success", orderItemService.createOrderItem(requestDTO));
     }
 
     @GetMapping
