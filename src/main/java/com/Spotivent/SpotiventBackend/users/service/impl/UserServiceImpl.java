@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -35,6 +36,11 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public RegisterResponseDTO register(RegisterRequestDTO registerRequestDTO) {
+        Optional<Users> existingUser = userRepository.findByEmail(registerRequestDTO.getEmail());
+        if (existingUser.isPresent()) {
+            throw new ApplicationException("User already exist, please log in with this email");
+        }
+
         Users newUser = new Users();
         newUser.setEmail(registerRequestDTO.getEmail());
         newUser.setPassword(passwordEncoder.encode(registerRequestDTO.getPassword()));
