@@ -66,6 +66,7 @@ public class SecurityConfig {
                     auth.requestMatchers("/api/v1/user/register").permitAll();
                     auth.requestMatchers("/api/v1/tickets/**").hasRole("ORGANIZER");
                     auth.requestMatchers("/api/v1/event/create").hasRole("ORGANIZER");
+                    auth.requestMatchers("/api/v1/coupon/create").hasRole("ORGANIZER");
                     auth.anyRequest().authenticated();
                 })
                 .sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
