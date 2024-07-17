@@ -55,6 +55,12 @@ public class CouponServiceImpl implements CouponService {
         return mapToCouponResponseDTO(coupon);
     }
 
+    @Override
+    public Coupons getDetailCoupon(Long id) {
+        return couponRepository.findById(id)
+                .orElseThrow(() -> new ApplicationException("Coupon not found"));
+    }
+
     private CouponResponseDTO mapToCouponResponseDTO(Coupons coupon) {
         CouponResponseDTO responseDTO = new CouponResponseDTO();
         responseDTO.setId(coupon.getId());
