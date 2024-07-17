@@ -2,6 +2,7 @@ package com.Spotivent.SpotiventBackend.auth.service.impl;
 
 import com.Spotivent.SpotiventBackend.auth.dto.LoginResponseDto;
 import com.Spotivent.SpotiventBackend.auth.service.AuthService;
+import com.Spotivent.SpotiventBackend.exception.ApplicationException;
 import com.Spotivent.SpotiventBackend.users.repository.UserRepository;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -29,8 +30,12 @@ public class AuthServiceImpl implements AuthService {
 
     public LoginResponseDto generateToken(Authentication authentication) {
         Instant now = Instant.now();
+        var userDetails = userRepository.findByEmail(authentication.getName());
+        if (userDetails.isEmpty()) {
+            throw new ApplicationException("User not found");
+        }
 
-        String scope = authentication.getAuthorities()
+        String role = authentication.getAuthorities()
                 .stream()
                 .map(GrantedAuthority::getAuthority)
                 .collect(Collectors.joining(" "));
@@ -40,13 +45,14 @@ public class AuthServiceImpl implements AuthService {
                 .issuedAt(now)
                 .expiresAt(now.plus(10, ChronoUnit.HOURS))
                 .subject(authentication.getName())
-                .claim("scope", scope)
+                .claim("role", role)
+                .claim("id", userDetails.get().getId())
                 .build();
 
         var token = jwtEncoder.encode(JwtEncoderParameters.from(claims)).getTokenValue();
         LoginResponseDto responseDto = new LoginResponseDto();
         responseDto.setToken(token);
-        responseDto.setRole(scope);
+        responseDto.setRole(role);
         responseDto.setMessage("User logged in successfully");
         return responseDto;
     }
