@@ -1,6 +1,5 @@
 package com.Spotivent.SpotiventBackend.orderItem.service.impl;
 
-import com.Spotivent.SpotiventBackend.exception.ApplicationException;
 import com.Spotivent.SpotiventBackend.orderItem.dto.CreateOrderItemRequestDTO;
 import com.Spotivent.SpotiventBackend.orderItem.dto.OrderItemResponseDTO;
 import com.Spotivent.SpotiventBackend.orderItem.entity.OrderItems;

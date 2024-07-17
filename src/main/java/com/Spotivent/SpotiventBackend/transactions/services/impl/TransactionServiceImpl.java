@@ -16,7 +16,6 @@ import com.Spotivent.SpotiventBackend.users.entity.Users;
 import com.Spotivent.SpotiventBackend.users.service.UserService;
 import com.Spotivent.SpotiventBackend.exception.ApplicationException;
 import org.springframework.context.annotation.Lazy;
-import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

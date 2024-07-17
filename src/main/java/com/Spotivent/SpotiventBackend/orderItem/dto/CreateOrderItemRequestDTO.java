@@ -1,6 +1,5 @@
 package com.Spotivent.SpotiventBackend.orderItem.dto;
 
-import com.Spotivent.SpotiventBackend.tickets.dto.TicketResponseDTO;
 import lombok.Data;
 
 @Data

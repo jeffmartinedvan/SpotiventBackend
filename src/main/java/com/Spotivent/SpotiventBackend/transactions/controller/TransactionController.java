@@ -6,7 +6,6 @@ import com.Spotivent.SpotiventBackend.transactions.dto.TransactionResponseDTO;
 import com.Spotivent.SpotiventBackend.transactions.services.TransactionService;
 import com.Spotivent.SpotiventBackend.response.Response;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

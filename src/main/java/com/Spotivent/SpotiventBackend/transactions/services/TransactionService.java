@@ -1,10 +1,8 @@
 package com.Spotivent.SpotiventBackend.transactions.services;
 
-import com.Spotivent.SpotiventBackend.orderItem.entity.OrderItems;
 import com.Spotivent.SpotiventBackend.transactions.dto.CreateTransactionRequestDTO;
 import com.Spotivent.SpotiventBackend.transactions.dto.TransactionResponseDTO;
 import com.Spotivent.SpotiventBackend.transactions.entity.Transactions;
-import org.springframework.security.core.Authentication;
 
 import java.util.List;
 
