@@ -17,10 +17,6 @@ public class Category {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @OneToOne(mappedBy = "category", cascade = CascadeType.ALL)
-    @JsonIgnore
-    private Events events;
-
     @NotNull(message = "Event category must not be null")
     @Column(name = "name", nullable = false)
     private String name;

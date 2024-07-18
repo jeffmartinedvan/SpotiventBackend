@@ -17,10 +17,6 @@ public class City {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    @OneToOne(mappedBy = "city", cascade = CascadeType.ALL)
-    @JsonIgnore
-    private Events events;
-
     @NotNull(message = "Event city must not be null")
     @Column(name = "name", nullable = false)
     private String name;

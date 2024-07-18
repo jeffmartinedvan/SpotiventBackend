@@ -41,19 +41,16 @@ public class Events {
     @JsonIgnore
     private Transactions transactions;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "city_id", referencedColumnName = "id", nullable = false)
-    @JsonIgnore
     private City city;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "category_id", referencedColumnName = "id", nullable = false)
-    @JsonIgnore
     private Category category;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "user_id", nullable = false)
-    @JsonIgnore
     private Users users;
 
     @NotNull(message = "Event name must not be null")
