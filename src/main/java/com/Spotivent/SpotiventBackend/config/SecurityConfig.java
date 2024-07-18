@@ -64,6 +64,9 @@ public class SecurityConfig {
                     auth.requestMatchers("/error/**").permitAll();
                     auth.requestMatchers("/api/v1/auth/login").permitAll();
                     auth.requestMatchers("/api/v1/user/register").permitAll();
+//                    auth.requestMatchers("/api/v1/event/create").hasAuthority("SCOPE_ORGANIZER");
+//                    auth.requestMatchers("/api/v1/ticket/**").hasRole("ORGANIZER");
+//                    auth.requestMatchers("/api/v1/coupon/**").hasRole("ORGANIZER");
                     auth.anyRequest().authenticated();
                 })
                 .sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
