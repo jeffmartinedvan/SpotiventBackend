@@ -1,11 +1,11 @@
 package com.Spotivent.SpotiventBackend.reviews.controller;
 
+import com.Spotivent.SpotiventBackend.auth.helper.Claims;
 import com.Spotivent.SpotiventBackend.reviews.dto.CreateReviewRequestDTO;
 import com.Spotivent.SpotiventBackend.reviews.dto.ReviewResponseDTO;
 import com.Spotivent.SpotiventBackend.reviews.services.ReviewService;
 import com.Spotivent.SpotiventBackend.response.Response;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -29,8 +29,10 @@ public class ReviewController {
         return Response.success("Reviews fetched successfully", reviewService.getReviewsByEventId(eventId));
     }
 
-    @GetMapping("/user/{userId}")
-    public ResponseEntity<Response<List<ReviewResponseDTO>>> getReviewsByUserId(@PathVariable Long userId) {
+    @GetMapping("/user")
+    public ResponseEntity<Response<List<ReviewResponseDTO>>> getReviewsByUserId() {
+        var claims = Claims.getClaims();
+        Long userId = (Long) claims.get("id");
         return Response.success("Reviews fetched successfully", reviewService.getReviewsByUserId(userId));
     }
 }

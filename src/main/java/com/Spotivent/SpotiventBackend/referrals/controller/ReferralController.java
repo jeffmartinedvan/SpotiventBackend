@@ -1,5 +1,6 @@
 package com.Spotivent.SpotiventBackend.referrals.controller;
 
+import com.Spotivent.SpotiventBackend.auth.helper.Claims;
 import com.Spotivent.SpotiventBackend.referrals.service.ReferralService;
 import com.Spotivent.SpotiventBackend.response.Response;
 import org.springframework.http.ResponseEntity;
@@ -16,9 +17,11 @@ public class ReferralController {
         this.referralService = referralService;
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<?> getReferralByUserId(@PathVariable Long id) {
-        return Response.success("Get referral success", referralService.getByUsersId(id));
+    @GetMapping
+    public ResponseEntity<?> getReferralByUserId() {
+        var claims = Claims.getClaims();
+        Long userId = (Long) claims.get("id");
+        return Response.success("Get referral success", referralService.getByUsersId(userId));
     }
 
 }

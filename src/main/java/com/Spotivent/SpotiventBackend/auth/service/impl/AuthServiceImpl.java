@@ -3,7 +3,6 @@ package com.Spotivent.SpotiventBackend.auth.service.impl;
 import com.Spotivent.SpotiventBackend.auth.dto.LoginResponseDto;
 import com.Spotivent.SpotiventBackend.auth.service.AuthService;
 import com.Spotivent.SpotiventBackend.exception.ApplicationException;
-import com.Spotivent.SpotiventBackend.points.repository.PointRepository;
 import com.Spotivent.SpotiventBackend.points.service.PointService;
 import com.Spotivent.SpotiventBackend.users.repository.UserRepository;
 import org.springframework.security.core.Authentication;
@@ -25,7 +24,7 @@ public class AuthServiceImpl implements AuthService {
     private final UserRepository userRepository;
     private final PointService pointService;
 
-    public AuthServiceImpl(JwtEncoder jwtEncoder, PasswordEncoder passwordEncoder, UserRepository userRepository, PointRepository pointRepository, PointService pointService) {
+    public AuthServiceImpl(JwtEncoder jwtEncoder, PasswordEncoder passwordEncoder, UserRepository userRepository, PointService pointService) {
         this.jwtEncoder = jwtEncoder;
         this.passwordEncoder = passwordEncoder;
         this.userRepository = userRepository;
