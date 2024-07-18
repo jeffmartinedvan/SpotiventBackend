@@ -3,6 +3,8 @@ package com.Spotivent.SpotiventBackend.auth.service.impl;
 import com.Spotivent.SpotiventBackend.auth.dto.LoginResponseDto;
 import com.Spotivent.SpotiventBackend.auth.service.AuthService;
 import com.Spotivent.SpotiventBackend.exception.ApplicationException;
+import com.Spotivent.SpotiventBackend.points.repository.PointRepository;
+import com.Spotivent.SpotiventBackend.points.service.PointService;
 import com.Spotivent.SpotiventBackend.users.repository.UserRepository;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -21,16 +23,19 @@ public class AuthServiceImpl implements AuthService {
     private final JwtEncoder jwtEncoder;
     private final PasswordEncoder passwordEncoder;
     private final UserRepository userRepository;
+    private final PointService pointService;
 
-    public AuthServiceImpl(JwtEncoder jwtEncoder, PasswordEncoder passwordEncoder, UserRepository userRepository) {
+    public AuthServiceImpl(JwtEncoder jwtEncoder, PasswordEncoder passwordEncoder, UserRepository userRepository, PointRepository pointRepository, PointService pointService) {
         this.jwtEncoder = jwtEncoder;
         this.passwordEncoder = passwordEncoder;
         this.userRepository = userRepository;
+        this.pointService = pointService;
     }
 
     public LoginResponseDto generateToken(Authentication authentication) {
         Instant now = Instant.now();
         var userDetails = userRepository.findByEmail(authentication.getName());
+        var pointDetails = pointService.getTotalPointsByUserId(userDetails.get().getId());
         if (userDetails.isEmpty()) {
             throw new ApplicationException("User not found");
         }
@@ -48,7 +53,7 @@ public class AuthServiceImpl implements AuthService {
                 .claim("role", role)
                 .claim("id", userDetails.get().getId())
                 .claim("username", userDetails.get().getUsername())
-                .claim("point", userDetails.get().getPoints())
+                .claim("point", pointDetails)
                 .build();
 
         var token = jwtEncoder.encode(JwtEncoderParameters.from(claims)).getTokenValue();

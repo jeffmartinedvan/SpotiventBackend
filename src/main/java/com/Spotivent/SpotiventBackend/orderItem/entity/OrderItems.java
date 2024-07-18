@@ -25,7 +25,7 @@ public class OrderItems {
     private Tickets tickets;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "transaction_id", nullable = false)
+    @JoinColumn(name = "transaction_id")
     @JsonIgnore
     private Transactions transactions;
 

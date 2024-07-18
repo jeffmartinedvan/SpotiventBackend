@@ -27,7 +27,7 @@ public class UserServiceImpl implements UserService {
     private final ReferralService referralService;
     private final PointService pointService;
 
-    public UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder, @Lazy ReferralService referralService, PointService pointService) {
+    public UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder, @Lazy ReferralService referralService, @Lazy PointService pointService) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.referralService = referralService;
