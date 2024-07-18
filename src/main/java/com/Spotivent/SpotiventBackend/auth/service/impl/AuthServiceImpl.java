@@ -47,6 +47,8 @@ public class AuthServiceImpl implements AuthService {
                 .subject(authentication.getName())
                 .claim("role", role)
                 .claim("id", userDetails.get().getId())
+                .claim("username", userDetails.get().getUsername())
+                .claim("point", userDetails.get().getPoints())
                 .build();
 
         var token = jwtEncoder.encode(JwtEncoderParameters.from(claims)).getTokenValue();
