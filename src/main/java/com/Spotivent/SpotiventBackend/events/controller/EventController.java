@@ -1,6 +1,5 @@
 package com.Spotivent.SpotiventBackend.events.controller;
 
-import com.Spotivent.SpotiventBackend.auth.helper.Claims;
 import com.Spotivent.SpotiventBackend.events.dto.CreateEventRequestDTO;
 import com.Spotivent.SpotiventBackend.events.dto.EventResponseDTO;
 import com.Spotivent.SpotiventBackend.events.entity.Events;
@@ -12,8 +11,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("api/v1/event")
