@@ -11,9 +11,9 @@ import com.Spotivent.SpotiventBackend.events.repository.EventRepository;
 import com.Spotivent.SpotiventBackend.events.repository.EventSpecification;
 import com.Spotivent.SpotiventBackend.events.service.EventService;
 import com.Spotivent.SpotiventBackend.exception.ApplicationException;
-import com.Spotivent.SpotiventBackend.users.entity.Roles;
 import com.Spotivent.SpotiventBackend.users.entity.Users;
 import com.Spotivent.SpotiventBackend.users.service.UserService;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
@@ -26,7 +26,7 @@ public class EventServiceImpl implements EventService {
     private final CityRepository cityRepository;
     private final CategoryRepository categoryRepository;
 
-    public EventServiceImpl(EventRepository eventRepository, UserService userService, CityRepository cityRepository, CategoryRepository categoryRepository) {
+    public EventServiceImpl(EventRepository eventRepository, @Lazy UserService userService, CityRepository cityRepository, CategoryRepository categoryRepository) {
         this.eventRepository = eventRepository;
         this.userService = userService;
         this.cityRepository = cityRepository;
@@ -44,8 +44,8 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public EventResponseDTO createEvent(CreateEventRequestDTO createEventRequestDTO, String email) {
-        Users users = userService.findByEmail(email);
+    public EventResponseDTO createEvent(CreateEventRequestDTO createEventRequestDTO) {
+        Users users = userService.getDetailUser(createEventRequestDTO.getUserId());
 
         City city = cityRepository.findByName(createEventRequestDTO.getCityName());
         if (city == null) {
