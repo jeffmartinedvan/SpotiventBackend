@@ -26,7 +26,7 @@ public class EventServiceImpl implements EventService {
     private final CityRepository cityRepository;
     private final CategoryRepository categoryRepository;
 
-    public EventServiceImpl(EventRepository eventRepository, @Lazy UserService userService, CityRepository cityRepository, CategoryRepository categoryRepository) {
+    public EventServiceImpl(EventRepository eventRepository, @Lazy UserService userService, @Lazy CityRepository cityRepository, @Lazy CategoryRepository categoryRepository) {
         this.eventRepository = eventRepository;
         this.userService = userService;
         this.cityRepository = cityRepository;
@@ -34,13 +34,13 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public Page<Events> getAllEvents(Pageable pageable, String eventName, String city, String category, Long userId, String upcoming) {
+    public Page<EventResponseDTO> getAllEvents(Pageable pageable, String eventName, String city, String category, Long userId, String upcoming) {
         Specification<Events> specification = Specification.where(EventSpecification.byEventName(eventName))
                 .and(EventSpecification.byCity(city))
                 .and(EventSpecification.byCategory(category))
                 .and(EventSpecification.byUserId(userId))
                 .and(EventSpecification.byUpcoming(upcoming));
-        return eventRepository.findAll(specification, pageable);
+        return eventRepository.findAll(specification, pageable).map(this::mapToEventAll);
     }
 
     @Override
@@ -94,5 +94,22 @@ public class EventServiceImpl implements EventService {
         responseDTO.setDescription(events.getDescription());
         responseDTO.setIsFree(events.getIsFree());
         return responseDTO;
+    }
+
+    public EventResponseDTO mapToEventAll(Events events) {
+        EventResponseDTO response = new EventResponseDTO();
+        response.setId(events.getId());
+        response.setEventName(events.getEventName());
+        response.setCityName(events.getCity().getName());
+        response.setCategoryName(events.getCategory().getName());
+        response.setThumbnail(events.getThumbnail());
+        response.setImage(events.getImage());
+        response.setLocation(events.getLocation());
+        response.setDate(events.getDate());
+        response.setStartTime(events.getStartTime());
+        response.setEndTime(events.getEndTime());
+        response.setDescription(events.getDescription());
+        response.setIsFree(events.getIsFree());
+        return response;
     }
 }

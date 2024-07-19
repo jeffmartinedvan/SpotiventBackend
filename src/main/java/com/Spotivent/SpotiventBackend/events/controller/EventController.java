@@ -23,7 +23,7 @@ public class EventController {
     }
 
     @GetMapping
-    public ResponseEntity<Response<Page<Events>>> getAllEvents(
+    public ResponseEntity<Response<Page<EventResponseDTO>>> getAllEvents(
             @RequestParam(required = false) String eventName,
             @RequestParam(required = false) String city,
             @RequestParam(required = false) String category,
